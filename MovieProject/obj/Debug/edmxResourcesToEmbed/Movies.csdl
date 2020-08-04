@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbMovieShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblDisc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="movie_id" Type="Int32" />
+    <Property Name="rent_cost" Type="Double" />
+    <Property Name="is_Available" Type="Boolean" />
+    <NavigationProperty Name="tblMovie" Relationship="Self.fk_mid" FromRole="tblDisc" ToRole="tblMovie" />
+  </EntityType>
+  <EntityType Name="tblMovie">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="duration" Type="Double" />
+    <NavigationProperty Name="tblDiscs" Relationship="Self.fk_mid" FromRole="tblMovie" ToRole="tblDisc" />
+  </EntityType>
+  <Association Name="fk_mid">
+    <End Role="tblMovie" Type="Self.tblMovie" Multiplicity="0..1" />
+    <End Role="tblDisc" Type="Self.tblDisc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMovie">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblDisc">
+        <PropertyRef Name="movie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbMovieShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblDiscs" EntityType="Self.tblDisc" />
+    <EntitySet Name="tblMovies" EntityType="Self.tblMovie" />
+    <AssociationSet Name="fk_mid" Association="Self.fk_mid">
+      <End Role="tblMovie" EntitySet="tblMovies" />
+      <End Role="tblDisc" EntitySet="tblDiscs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

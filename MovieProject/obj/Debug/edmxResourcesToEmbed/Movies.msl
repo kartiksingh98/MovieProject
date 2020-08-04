@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbMovieShopModelStoreContainer" CdmEntityContainer="dbMovieShopEntities">
+    <EntitySetMapping Name="tblDiscs">
+      <EntityTypeMapping TypeName="dbMovieShopModel.tblDisc">
+        <MappingFragment StoreEntitySet="tblDisc">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+          <ScalarProperty Name="rent_cost" ColumnName="rent_cost" />
+          <ScalarProperty Name="is_Available" ColumnName="is_Available" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMovies">
+      <EntityTypeMapping TypeName="dbMovieShopModel.tblMovie">
+        <MappingFragment StoreEntitySet="tblMovie">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbMovieShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblDisc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="movie_id" Type="int" />
+    <Property Name="rent_cost" Type="float" />
+    <Property Name="is_Available" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblMovie">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="20" />
+    <Property Name="duration" Type="float" />
+  </EntityType>
+  <Association Name="fk_mid">
+    <End Role="tblMovie" Type="Self.tblMovie" Multiplicity="0..1" />
+    <End Role="tblDisc" Type="Self.tblDisc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMovie">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblDisc">
+        <PropertyRef Name="movie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbMovieShopModelStoreContainer">
+    <EntitySet Name="tblDisc" EntityType="Self.tblDisc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMovie" EntityType="Self.tblMovie" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_mid" Association="Self.fk_mid">
+      <End Role="tblMovie" EntitySet="tblMovie" />
+      <End Role="tblDisc" EntitySet="tblDisc" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
